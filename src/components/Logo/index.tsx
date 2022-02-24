@@ -102,17 +102,17 @@ function Logo() {
 
   return (
     <LogoWrapper to="/overview">
-      <LogoSignWrapper>
+      {/* <LogoSignWrapper>
         <LogoSign>
           <LogoSignInner />
         </LogoSign>
-      </LogoSignWrapper>
+      </LogoSignWrapper> */}
       <Hidden smDown>
         <LogoTextWrapper>
           <Tooltip title="Version 1.1.0" arrow placement="right">
-            <VersionBadge>1.1</VersionBadge>
+            <VersionBadge>v1.1</VersionBadge>
           </Tooltip>
-          <LogoText>Tokyo Free White</LogoText>
+          <LogoText>School CMS</LogoText>
         </LogoTextWrapper>
       </Hidden>
     </LogoWrapper>
