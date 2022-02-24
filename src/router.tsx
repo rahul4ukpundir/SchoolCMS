@@ -13,12 +13,14 @@ const Loader = (Component) => (props) => (
   </Suspense>
 );
 
-// Pages
+// Class
+const ClassList =Loader(lazy(() => import('src/components/StudentClass/ClassList')));
+
 
 const AddStudent =Loader(lazy(() => import('src/components/Students/AddStudent')));
 
 
-
+const Transaction =Loader(lazy(() => import('src/components/Transactions/index')));
 
 // Status
 
@@ -29,7 +31,31 @@ const StatusMaintenance = Loader(lazy(() => import('src/content/pages/Status/Mai
 
 
 const routes: PartialRouteObject[] = [
-  
+  {
+    path: 'class',
+    element: (
+      <SidebarLayout />
+    ),
+    children: [
+      {
+        path: '/',
+        element: (
+          <Navigate
+            to="/class/classDetails"
+            replace
+          />
+        )
+      },
+      {
+        path: 'classDetails',
+        element: <ClassList />
+      },
+      {
+        path: 'addClass',
+        element: <Transaction />
+      }
+    ]
+  },
   {
     path: 'students',
     element: (
