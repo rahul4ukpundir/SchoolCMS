@@ -34,46 +34,34 @@ const menuItems: MenuItems[] = [
     heading: '',
     items: [
       {
-        name: 'Overview',
+        name: 'School CMS',
         link: '/overview',
         icon: DesignServicesTwoToneIcon
       }
     ]
   },
+  
   {
-    heading: 'Dashboards',
+    heading: 'Class',
     items: [
       {
-        name: 'Crypto',
-        link: '/dashboards/crypto',
-        icon: BrightnessLowTwoToneIcon
-      },
-      {
-        name: 'Messenger',
-        icon: MmsTwoToneIcon,
-        link: '/dashboards/messenger'
-      },
-    ]
-  },
-  {
-    heading: 'Management',
-    items: [
-      {
-        name: 'Transactions',
+        name: 'Manage Class',
         icon: TableChartTwoToneIcon,
-        link: '/management/transactions'
-      },
-      {
-        name: 'User Profile',
-        icon: AccountCircleTwoToneIcon,
-        link: '/management/profile',
+        link: '/management/transactions',
         items: [
           {
-            name: 'Profile Details',
+            name: 'Add Class',
+            icon: TableChartTwoToneIcon,
             link: '/management/profile/details'
           },
           {
-            name: 'User Settings',
+            name: 'Edit Class',
+            icon: TableChartTwoToneIcon,
+            link: '/management/profile/settings'
+          },
+          {
+            name: 'In Active Class',
+            icon: TableChartTwoToneIcon,
             link: '/management/profile/settings'
           }
         ]
@@ -81,83 +69,65 @@ const menuItems: MenuItems[] = [
     ]
   },
   {
-    heading: 'Components',
+    heading: 'Section',
     items: [
       {
-        name: 'Buttons',
-        icon: BallotTwoToneIcon,
-        link: '/components/buttons'
-      },
-      {
-        name: 'Modals',
-        icon: BeachAccessTwoToneIcon,
-        link: '/components/modals'
-      },
-      {
-        name: 'Accordions',
-        icon: EmojiEventsTwoToneIcon,
-        link: '/components/accordions'
-      },
-      {
-        name: 'Tabs',
-        icon: FilterVintageTwoToneIcon,
-        link: '/components/tabs'
-      },
-      {
-        name: 'Badges',
-        icon: HowToVoteTwoToneIcon,
-        link: '/components/badges'
-      },
-      {
-        name: 'Tooltips',
-        icon: LocalPharmacyTwoToneIcon,
-        link: '/components/tooltips'
-      },
-      {
-        name: 'Avatars',
-        icon: RedeemTwoToneIcon,
-        link: '/components/avatars'
-      },
-      {
-        name: 'Cards',
-        icon: SettingsTwoToneIcon,
-        link: '/components/cards'
-      },
-      {
-        name: 'Forms',
-        icon: TrafficTwoToneIcon,
-        link: '/components/forms'
-      },
-    ]
-  },
-  {
-    heading: 'Extra Pages',
-    items: [
-      {
-        name: 'Status',
-        icon: VerifiedUserTwoToneIcon,
-        link: '/status',
+        name: 'Manage Section',
+        icon: TableChartTwoToneIcon,
+        link: '/components/forms',
         items: [
           {
-            name: 'Error 404',
-            link: '/status/404'
+            name: 'Add Section',
+            icon: TableChartTwoToneIcon,
+            link: '/components/forms'
           },
           {
-            name: 'Error 500',
-            link: '/status/500'
+            name: 'Edit Section',
+            icon: TableChartTwoToneIcon,
+            link: '/management/profile/settings'
           },
           {
-            name: 'Maintenance',
-            link: '/status/maintenance'
-          },
-          {
-            name: 'Coming Soon',
-            link: '/status/coming-soon'
+            name: 'In Active Section',
+            icon: TableChartTwoToneIcon,
+            link: '/management/profile/settings'
           }
         ]
       }
     ]
-  }
+  },
+  {
+    heading: 'Students',
+    items: [
+      {
+        name: 'Manage Student',
+        icon: TableChartTwoToneIcon,
+        link: '/management/transactions',
+        items: [
+          {
+            name: 'Student List',
+            icon: TableChartTwoToneIcon,
+            link: '/management/transactions'
+          },
+          {
+            name: 'Add Student',
+            icon: TableChartTwoToneIcon,
+            link: '/students/addstudents'
+          },
+          {
+            name: 'Edit Student',
+            icon: TableChartTwoToneIcon,
+            link: '/management/profile/settings'
+          },
+          {
+            name: 'In Active Student',
+            icon: TableChartTwoToneIcon,
+            link: '/management/profile/settings'
+          }
+        ]
+      }
+    ]
+  },
+
 ];
 
 export default menuItems;
