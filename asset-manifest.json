@@ -1,0 +1,41 @@
+{
+  "files": {
+    "static/js/0.48759352.chunk.js": "/school-cms/static/js/0.48759352.chunk.js",
+    "static/js/0.48759352.chunk.js.map": "/school-cms/static/js/0.48759352.chunk.js.map",
+    "static/js/1.87359d1c.chunk.js": "/school-cms/static/js/1.87359d1c.chunk.js",
+    "static/js/1.87359d1c.chunk.js.map": "/school-cms/static/js/1.87359d1c.chunk.js.map",
+    "main.js": "/school-cms/static/js/main.1443d4ea.chunk.js",
+    "main.js.map": "/school-cms/static/js/main.1443d4ea.chunk.js.map",
+    "runtime-main.js": "/school-cms/static/js/runtime-main.4c5cdc6a.js",
+    "runtime-main.js.map": "/school-cms/static/js/runtime-main.4c5cdc6a.js.map",
+    "static/css/4.c9905f33.chunk.css": "/school-cms/static/css/4.c9905f33.chunk.css",
+    "static/js/4.f6a99c5a.chunk.js": "/school-cms/static/js/4.f6a99c5a.chunk.js",
+    "static/js/4.f6a99c5a.chunk.js.map": "/school-cms/static/js/4.f6a99c5a.chunk.js.map",
+    "static/js/5.9fdfd95b.chunk.js": "/school-cms/static/js/5.9fdfd95b.chunk.js",
+    "static/js/5.9fdfd95b.chunk.js.map": "/school-cms/static/js/5.9fdfd95b.chunk.js.map",
+    "static/js/6.2c57f586.chunk.js": "/school-cms/static/js/6.2c57f586.chunk.js",
+    "static/js/6.2c57f586.chunk.js.map": "/school-cms/static/js/6.2c57f586.chunk.js.map",
+    "static/js/7.36c6b545.chunk.js": "/school-cms/static/js/7.36c6b545.chunk.js",
+    "static/js/7.36c6b545.chunk.js.map": "/school-cms/static/js/7.36c6b545.chunk.js.map",
+    "static/js/8.e0922d00.chunk.js": "/school-cms/static/js/8.e0922d00.chunk.js",
+    "static/js/8.e0922d00.chunk.js.map": "/school-cms/static/js/8.e0922d00.chunk.js.map",
+    "static/js/9.83e3d47b.chunk.js": "/school-cms/static/js/9.83e3d47b.chunk.js",
+    "static/js/9.83e3d47b.chunk.js.map": "/school-cms/static/js/9.83e3d47b.chunk.js.map",
+    "static/js/10.86c3da49.chunk.js": "/school-cms/static/js/10.86c3da49.chunk.js",
+    "static/js/10.86c3da49.chunk.js.map": "/school-cms/static/js/10.86c3da49.chunk.js.map",
+    "static/js/11.610f5003.chunk.js": "/school-cms/static/js/11.610f5003.chunk.js",
+    "static/js/11.610f5003.chunk.js.map": "/school-cms/static/js/11.610f5003.chunk.js.map",
+    "static/js/12.f0192a81.chunk.js": "/school-cms/static/js/12.f0192a81.chunk.js",
+    "static/js/12.f0192a81.chunk.js.map": "/school-cms/static/js/12.f0192a81.chunk.js.map",
+    "index.html": "/school-cms/index.html",
+    "static/css/4.c9905f33.chunk.css.map": "/school-cms/static/css/4.c9905f33.chunk.css.map",
+    "static/js/4.f6a99c5a.chunk.js.LICENSE.txt": "/school-cms/static/js/4.f6a99c5a.chunk.js.LICENSE.txt",
+    "static/js/7.36c6b545.chunk.js.LICENSE.txt": "/school-cms/static/js/7.36c6b545.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4c5cdc6a.js",
+    "static/css/4.c9905f33.chunk.css",
+    "static/js/4.f6a99c5a.chunk.js",
+    "static/js/main.1443d4ea.chunk.js"
+  ]
+}
