@@ -32,6 +32,23 @@ const StatusMaintenance = Loader(lazy(() => import('src/content/pages/Status/Mai
 
 const routes: PartialRouteObject[] = [
   {
+    path: '/',
+    element: (
+      <SidebarLayout />
+    ),
+    children: [
+      {
+        path: '/SchoolCMS',
+        element: (
+          <Navigate
+            to="/class/classDetails"
+            replace
+          />
+        )
+      }
+    ]
+  },
+  {
     path: 'class',
     element: (
       <SidebarLayout />

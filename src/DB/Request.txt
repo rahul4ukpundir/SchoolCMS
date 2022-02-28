@@ -1,0 +1,68 @@
+
+  Fees. 
+	Fees Id
+      StudentId,
+	FeesAmount,
+	Month,
+	Year
+
+Student Screen:
+	Add Student
+	 - RollNo
+ 	 - ClassId
+	 - SectionId
+	 - Name
+	 - FatherName
+	 - MotherName
+	 - DOB
+	 - Gender
+	 - Photo
+	 - PhoneNo
+	 - Address
+	 - IsActive
+
+Student Request
+ {
+  "rollNo": 0,
+  "classId": 1,
+  "sectionId": 1,
+  "studentName": "Shardhansh Pundir",
+  "fatherName": "Rahul Pundir",
+  "motherName": "Meenakshi Pundir",
+  "dob": "2022-02-26T05:44:34.996Z",
+  "gender": true,
+  "photo": "string",
+  "phoneNO": "9837267844",
+  "address": "New Meenakshipuram Meerut",
+  "isActive": true,
+  "createdDate": "2022-02-26T05:44:34.996Z",
+  "modifiedDate": "2022-02-26T05:44:34.996Z"
+}
+	
+Customer Query
+{
+  "customerQueryId": 0,
+  "name": "Rahul",
+  "phoneNo": "8630392619",
+  "email": "rahul4uk.pundir@gmail.com",
+  "query": "Hi this is testing query",
+  "isActive": true,
+  "createdDate": "2022-02-28T04:45:53.197Z",
+  "modifiedDate": "2022-02-28T04:45:53.197Z"
+}
+
+Fees Screen:
+  Add Fees
+	- Select Class
+	- Select Section
+	- Select Student
+	- Select Month
+	- Select Year
+	- Fees Amount
+View Fees -
+
+   Filter: Class wise and Section Fees and Month
+
+Query 1: Select that student whose fees are not paid for the selected month.
+
+
