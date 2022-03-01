@@ -23,12 +23,53 @@ const triggerAddStudent = async (studentModel: Student) => {
   return await apiService.POSTCALL(apiBaseUrl, studentModel, 3000);
 };
 export const fetchClasses = async () => {
-  const result = await triggerFetchClass();
-  return result;
+ // const result = await triggerFetchClass();
+  const classData = [
+    {
+      value: 1,
+      label: 'Pre_Nuresery'
+    },
+    {
+      value:2,
+      label: 'Nuresery'
+    },
+    {
+      value: 3,
+      label: 'First'
+    },
+    {
+      value: 4,
+      label: 'Second'
+    },
+    {
+      value: 5,
+      label: 'Third'
+    },
+    {
+      value: 6,
+      label: 'Fourth'
+    },
+    {
+      value: 7,
+      label: 'Fifth'
+    }
+  ];
+  
+  return classData;
 };
 export const fetchSections = async () => {
-  const result = await triggerFetchSection();
-  return result;
+  //const result = await triggerFetchSection();
+  const sectionData = [
+    {
+      value: 1,
+      label: 'A'
+    },
+    {
+      value: 2,
+      label: 'B'
+    }
+  ]
+  return sectionData;
 };
 export const fetchStudents = async () => {
   const result = await triggerFetchStudent();

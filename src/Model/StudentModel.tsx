@@ -22,6 +22,6 @@ export class Student {
     Gender:string;
     Photo:string;
     PhoneNo:string;
-    Addrss:string;
+    Address:string;
     IsActive:boolean;
 }
