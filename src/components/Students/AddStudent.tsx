@@ -20,7 +20,8 @@ import {
   RadioGroup,
   FormControlLabel,
   FormControl,
-  FormLabel
+  FormLabel,
+  Box
 } from '@mui/material';
 
 import { useEffect, useState } from 'react';
@@ -137,7 +138,7 @@ const AddStudent = () => {
                 <CardHeader title="New Student Registration" />
                 <Divider />
                 <CardContent
-                  sx={{ '& .MuiTextField-root': { m: 2, width: '50ch' } }}
+                  sx={{ '& .MuiTextField-root': { m: 2, width: '25ch'} }}
                 >
                   {' '}
                   <TextField
@@ -157,7 +158,7 @@ const AddStudent = () => {
                       </MenuItem>
                     ))}
                   </TextField>
-                  <TextField
+                    <TextField
                     id="sectionId"
                     select
                     label="Select section*"
@@ -237,7 +238,7 @@ const AddStudent = () => {
                   />
                   <FormControl
                     component="fieldset"
-                    sx={{ width: '50ch', margin: 2 }}
+                    style={{marginLeft: 22}}
                   >
                     <FormLabel component="legend">Gender</FormLabel>
                     <RadioGroup
