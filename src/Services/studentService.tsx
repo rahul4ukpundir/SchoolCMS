@@ -76,6 +76,7 @@ export const fetchStudents = async () => {
   return result;
 };
 export const addStudent = async (studentModel: Student) => {
+  debugger;
   const result = await triggerAddStudent(studentModel);
   return result;
 };

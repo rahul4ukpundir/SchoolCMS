@@ -12,16 +12,18 @@ export class Section{
 }
 
 export class Student {
-    RollNo?: number;
-    ClassId: number;
-    SectionId:number;
-    StudentName:string;
-    FatherName:string;
-    MotherName:string;
-    Dob:string;
-    Gender:string;
-    Photo:string;
-    PhoneNo:string;
-    Address:string;
-    IsActive:boolean;
+    rollNo?: number;
+    classId: number;
+    sectionId:number;
+    studentName:string;
+    fatherName:string;
+    motherName:string;
+    dob:Date;
+    gender:string;
+    photo:string;
+    email:string
+    phoneNo:string;
+    address:string;
+    isActive:boolean;
+    file?:any
 }

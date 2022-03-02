@@ -3,9 +3,15 @@ import * as yup from 'yup';
 import { Helmet } from 'react-helmet-async';
 import PageTitle from 'src/components/PageTitle';
 import PageTitleWrapper from 'src/components/PageTitleWrapper';
-// import {fetchClasses, fetchSections} from "../../Services/studentService"
+import { addStudent } from '../../Services/studentService';
 import DateAdapter from '@mui/lab/AdapterDayjs';
 import DatePicker from '@mui/lab/DatePicker';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker
+} from '@material-ui/pickers';
+
 import {
   Container,
   Grid,
@@ -24,11 +30,14 @@ import {
   Box
 } from '@mui/material';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { LocalizationProvider } from '@mui/lab';
+import { Student } from 'src/Model/StudentModel';
+import Label from '../Label';
+import Thumb from './Thumb';
 const validationSchema = yup.object({
-  classId: yup.string().required('Select your class.'),
-  sectionId: yup.string().required('Select your section.'),
+  classId: yup.number().integer().min(1, "Please select class").required('Please select class.'),
+  sectionId: yup.number().integer().min(1, "Please select section").required('Please select section.'),
   email: yup.string().email().required('Email is required.'),
   studentName: yup
     .string()
@@ -42,10 +51,11 @@ const validationSchema = yup.object({
     .string()
     .max(16, 'mother name shoud not be more than 16 character.')
     .required('Mother name is required'),
-  phone: yup
+  phoneNo: yup
     .string()
     .max(16, 'Phone should be of minimum 10 characters length.')
     .required('Phone is required')
+  // dob: yup.date().required("Please select dob.")
 });
 
 const sectionData = [
@@ -57,7 +67,7 @@ const sectionData = [
     value: 2,
     label: 'B'
   }
-]
+];
 const classData = [
   {
     value: 1,
@@ -93,26 +103,27 @@ const AddStudent = () => {
   const [dobValue, setDobValue] = useState();
   const formik = useFormik({
     initialValues: {
-      classId: '',
-      sectionId: '',
+      classId: 0,
+      sectionId: 0,
       studentName: '',
       fatherName: '',
       motherName: '',
-      dob: '',
-      phone: '',
-      gender: '',
+      dob: new Date(),
+      phoneNo: '',
+      gender: 'male',
       email: '',
-      address: ''
+      address: '',
+      photo: '',
+      isActive: true,
+      file:null
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: (values: Student) => {
+      debugger;
+      addStudent(values).then((data) => {});
     }
   });
 
-  useEffect(() => {
-    //getClassDeatails();
-  }, []);
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
@@ -138,7 +149,7 @@ const AddStudent = () => {
                 <CardHeader title="New Student Registration" />
                 <Divider />
                 <CardContent
-                  sx={{ '& .MuiTextField-root': { m: 2, width: '25ch'} }}
+                  sx={{ '& .MuiTextField-root': { m: 2, width: '25ch' } }}
                 >
                   {' '}
                   <TextField
@@ -158,13 +169,15 @@ const AddStudent = () => {
                       </MenuItem>
                     ))}
                   </TextField>
-                    <TextField
+                  <TextField
                     id="sectionId"
+                    name="sectionId"
                     select
                     label="Select section*"
                     onChange={formik.handleChange}
                     error={
-                      formik.touched.classId && Boolean(formik.errors.sectionId)
+                      formik.touched.sectionId &&
+                      Boolean(formik.errors.sectionId)
                     }
                     helperText={
                       formik.touched.sectionId && formik.errors.sectionId
@@ -220,32 +233,45 @@ const AddStudent = () => {
                   />
                   <LocalizationProvider dateAdapter={DateAdapter}>
                     <DatePicker
-                      value={dobValue}
+                      value={formik.values.dob}
                       onChange={(newValue) => {
-                        setDobValue(newValue);
+                        formik.setFieldValue('dob', newValue);
                       }}
-                      renderInput={(params) => <TextField {...params} />}
+                      renderInput={(params) => (
+                        <TextField
+                          name="dob"
+                          value={formik.values.dob}
+                          onBlur={formik.handleBlur}
+                          {...params}
+                        />
+                      )}
                     />
                   </LocalizationProvider>
                   <TextField
                     fullWidth
-                    id="phone"
+                    id="phoneNo"
                     label="Phone No*"
-                    value={formik.values.phone}
+                    value={formik.values.phoneNo}
                     onChange={formik.handleChange}
-                    error={formik.touched.phone && Boolean(formik.errors.phone)}
-                    helperText={formik.touched.phone && formik.errors.phone}
+                    error={
+                      formik.touched.phoneNo && Boolean(formik.errors.phoneNo)
+                    }
+                    helperText={formik.touched.phoneNo && formik.errors.phoneNo}
                   />
-                  <FormControl
-                    component="fieldset"
-                    style={{marginLeft: 22}}
-                  >
+                  <FormControl component="fieldset" style={{ marginLeft: 22 }}>
                     <FormLabel component="legend">Gender</FormLabel>
                     <RadioGroup
                       row
                       aria-label="gender"
-                      name="row-radio-buttons-group"
-                      defaultValue={"male"}
+                      name="gender"
+                      defaultValue={formik.values.gender}
+                      onChange={(event) => {
+                        debugger;
+                        formik.setFieldValue(
+                          'gender',
+                          event.currentTarget.value
+                        );
+                      }}
                     >
                       <FormControlLabel
                         value="male"
@@ -257,7 +283,6 @@ const AddStudent = () => {
                         control={<Radio />}
                         label="Female"
                       />
-                      
                     </RadioGroup>
                   </FormControl>
                   <TextField
@@ -269,7 +294,7 @@ const AddStudent = () => {
                     onChange={formik.handleChange}
                     minRows={3}
                   />
-                   <TextField
+                  <TextField
                     fullWidth
                     id="email"
                     label="Email"
@@ -277,6 +302,16 @@ const AddStudent = () => {
                     onChange={formik.handleChange}
                     maxRows={5}
                   />
+                  
+                  <div className="form-group">
+                  <Label>Photo upload</Label>
+                  <input id="file" name="file" type="file" onChange={(event) => {
+                    formik.setFieldValue("file", event.currentTarget.files[0]);
+                    
+                  }} style ={{margin:20}} />
+
+                  {formik.values.file && <Thumb fileData={formik.values.file} />}
+                </div>
                   <Button
                     color="primary"
                     variant="contained"
