@@ -7,6 +7,8 @@ import { addStudent } from '../../Services/studentService';
 import DateAdapter from '@mui/lab/AdapterDayjs';
 import DatePicker from '@mui/lab/DatePicker';
 import DateFnsUtils from '@date-io/date-fns';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker
@@ -35,27 +37,28 @@ import { LocalizationProvider } from '@mui/lab';
 import { Student } from 'src/Model/StudentModel';
 import Label from '../Label';
 import Thumb from './Thumb';
+dayjs.extend(utc)
 const validationSchema = yup.object({
   classId: yup.number().integer().min(1, "Please select class").required('Please select class.'),
   sectionId: yup.number().integer().min(1, "Please select section").required('Please select section.'),
   email: yup.string().email().required('Email is required.'),
   studentName: yup
     .string()
-    .max(16, 'Name shoud not be more than 16 character.')
+    .max(32, 'Name shoud not be more than 16 character.')
     .required('Name is required'),
   fatherName: yup
     .string()
-    .max(16, 'Father name shoud not be more than 16 character.')
+    .max(32, 'Father name shoud not be more than 16 character.')
     .required('Father name is required'),
   motherName: yup
     .string()
-    .max(16, 'mother name shoud not be more than 16 character.')
+    .max(32, 'mother name shoud not be more than 16 character.')
     .required('Mother name is required'),
   phoneNo: yup
     .string()
-    .max(16, 'Phone should be of minimum 10 characters length.')
-    .required('Phone is required')
-  // dob: yup.date().required("Please select dob.")
+    .max(10, 'Phone should be of minimum 10 characters length.')
+    .required('Phone is required'),
+  address: yup.string().max(64, 'Phone should not be more than 64 length.')
 });
 
 const sectionData = [
@@ -108,9 +111,9 @@ const AddStudent = () => {
       studentName: '',
       fatherName: '',
       motherName: '',
-      dob: new Date(),
+      dob: dayjs().utc().format(),
       phoneNo: '',
-      gender: 'male',
+      gender: true,
       email: '',
       address: '',
       photo: '',
@@ -266,7 +269,6 @@ const AddStudent = () => {
                       name="gender"
                       defaultValue={formik.values.gender}
                       onChange={(event) => {
-                        debugger;
                         formik.setFieldValue(
                           'gender',
                           event.currentTarget.value
@@ -274,12 +276,12 @@ const AddStudent = () => {
                       }}
                     >
                       <FormControlLabel
-                        value="male"
+                        value={true}
                         control={<Radio defaultChecked={true} />}
                         label="Male"
                       />
                       <FormControlLabel
-                        value="female"
+                        value={false}
                         control={<Radio />}
                         label="Female"
                       />
@@ -307,6 +309,7 @@ const AddStudent = () => {
                   <Label>Photo upload</Label>
                   <input id="file" name="file" type="file" onChange={(event) => {
                     formik.setFieldValue("file", event.currentTarget.files[0]);
+                    console.log(event.currentTarget.files[0])
                     
                   }} style ={{margin:20}} />
 

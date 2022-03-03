@@ -10,7 +10,6 @@ class Thumb extends React.Component<any, any> {
     };
   
     componentWillReceiveProps(nextProps) {
-        debugger;
       if (!nextProps.fileData) { return; }
   
       this.setState({ loading: true }, () => {
@@ -26,9 +25,7 @@ class Thumb extends React.Component<any, any> {
   
     render() {
       const { loading, thumb } = this.state;
-     debugger;
       if (! this.props.fileData) { return null; }
-  
       if (loading) { return <p>loading...</p>; }
   
       return (<img src={thumb}

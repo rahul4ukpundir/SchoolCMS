@@ -5,7 +5,7 @@ USE SchoolDatabase
 GO
 CREATE TABLE StudentClass(
   ClassId INT  IDENTITY(1,1)  PRIMARY KEY  NOT NULL,
-  ClassName VARCHAR(16),
+  ClassName VARCHAR(32),
   IsActive BIT,
   CreatedDate DATETIME DEFAULT GETDATE() NOT NULL,
   ModifiedDate DATETIME DEFAULT GETDATE() NOT NULL,
@@ -27,7 +27,7 @@ GO
 CREATE TABLE Section(
   SectionId INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
   ClassId INT FOREIGN KEY REFERENCES  StudentClass(ClassId),
-  SectionName VARCHAR(16),
+  SectionName VARCHAR(32),
   IsActive BIT,
   CreatedDate DATETIME DEFAULT GETDATE() NOT NULL,
   ModifiedDate DATETIME DEFAULT GETDATE() NOT NULL,
@@ -49,13 +49,13 @@ CREATE TABLE Student(
   RollNo INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
   ClassId INT FOREIGN KEY REFERENCES  StudentClass(ClassId),
   SectionId INT FOREIGN KEY REFERENCES  Section(SectionId),
-  StudentName VARCHAR(16),
-  FatherName VARCHAR(16),
-  MotherName VARCHAR(16),
+  StudentName VARCHAR(32),
+  FatherName VARCHAR(32),
+  MotherName VARCHAR(32),
   DOB DATE,
   Gender BIT,
   Photo VARCHAR(16),
-  PhoneNO VARCHAR(16),
+  PhoneNO VARCHAR(10),
   Address VARCHAR(64),
   IsActive BIT,
   CreatedDate DATETIME DEFAULT GETDATE() NOT NULL,
@@ -93,7 +93,9 @@ CREATE TABLE CustomerQuery(
   ModifiedDate DATETIME DEFAULT GETDATE() NOT NULL,
 )
 
-
-
-drop table CustomerQuery
+DROP TABLE Fees
+DROP TABLE Student
+DROP TABLE Section
+DROP TABLE StudentClass
+DROP TABLE CustomerQuery
 select * from CustomerQuery

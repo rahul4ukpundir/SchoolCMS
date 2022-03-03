@@ -12,7 +12,7 @@ export const apiService = {
 /* istanbul ignore next*/
 async function POSTCALL(urlMethodName: any, params: any, delay: any, config: any= {}) {
   return axios
-    .post(urlMethodName, JSON.stringify(params), config )
+    .post(urlMethodName, JSON.stringify(params),{headers: {'Content-Type': 'application/json'}}) 
     .then((response: AxiosResponse) => response.data);
 }
 

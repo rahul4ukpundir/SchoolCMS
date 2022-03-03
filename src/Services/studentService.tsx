@@ -1,7 +1,7 @@
 import { Student } from 'src/Model/StudentModel';
 import { apiService } from './apiService';
 
-let apiBaseUrl = '';
+let apiBaseUrl = 'https://localhost:7028/api/Student/';
 
 const triggerFetchClass = async () => {
   const url = `${apiBaseUrl}/getClassDeatails`;
@@ -19,18 +19,18 @@ const triggerFetchStudent = async () => {
 };
 
 const triggerAddStudent = async (studentModel: Student) => {
-  const url = `${apiBaseUrl}/addStudent`;
-  return await apiService.POSTCALL(apiBaseUrl, studentModel, 3000);
+  const url = `${apiBaseUrl}AddStudents`;
+  return await apiService.POSTCALL(url, studentModel, 3000);
 };
 export const fetchClasses = async () => {
- // const result = await triggerFetchClass();
+  // const result = await triggerFetchClass();
   const classData = [
     {
       value: 1,
       label: 'Pre_Nuresery'
     },
     {
-      value:2,
+      value: 2,
       label: 'Nuresery'
     },
     {
@@ -54,7 +54,7 @@ export const fetchClasses = async () => {
       label: 'Fifth'
     }
   ];
-  
+
   return classData;
 };
 export const fetchSections = async () => {
@@ -68,7 +68,7 @@ export const fetchSections = async () => {
       value: 2,
       label: 'B'
     }
-  ]
+  ];
   return sectionData;
 };
 export const fetchStudents = async () => {
@@ -76,7 +76,12 @@ export const fetchStudents = async () => {
   return result;
 };
 export const addStudent = async (studentModel: Student) => {
-  debugger;
-  const result = await triggerAddStudent(studentModel);
-  return result;
+  try {
+    debugger;
+    const result = await triggerAddStudent(studentModel);
+    console.log("result ="+result);
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
 };

@@ -18,8 +18,8 @@ export class Student {
     studentName:string;
     fatherName:string;
     motherName:string;
-    dob:Date;
-    gender:string;
+    dob:any;
+    gender:boolean;
     photo:string;
     email:string
     phoneNo:string;
