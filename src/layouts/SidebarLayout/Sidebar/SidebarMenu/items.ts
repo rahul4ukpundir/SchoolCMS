@@ -98,7 +98,7 @@ const menuItems: MenuItems[] = [
           {
             name: 'Student List',
             icon: TableChartTwoToneIcon,
-            link: '/management/transactions'
+            link: '/students/studentDetails'
           },
           {
             name: 'Add Student',

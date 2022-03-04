@@ -16,7 +16,7 @@ const Loader = (Component) => (props) => (
 // Class
 const ClassList =Loader(lazy(() => import('src/components/StudentClass/ClassList')));
 
-
+const StudentDetails =Loader(lazy(() => import('src/components/Students/StudentDetails')));
 const AddStudent =Loader(lazy(() => import('src/components/Students/AddStudent')));
 
 
@@ -93,8 +93,8 @@ const routes: PartialRouteObject[] = [
         element: <AddStudent />
       },
       {
-        path: 'messenger',
-        element: <AddStudent />
+        path: 'studentDetails',
+        element: <StudentDetails />
       }
     ]
   },

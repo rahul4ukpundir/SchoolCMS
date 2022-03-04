@@ -22,6 +22,12 @@ const triggerAddStudent = async (studentModel: Student) => {
   const url = `${apiBaseUrl}AddStudents`;
   return await apiService.POSTCALL(url, studentModel, 3000);
 };
+
+const triggerStudentDetails = async () => {
+  const url = `${apiBaseUrl}BindStudentDetails`;
+  return await apiService.GETCALL(url, 3000, '');
+};
+
 export const fetchClasses = async () => {
   // const result = await triggerFetchClass();
   const classData = [
@@ -77,7 +83,6 @@ export const fetchStudents = async () => {
 };
 export const addStudent = async (studentModel: Student) => {
   try {
-    debugger;
     const result = await triggerAddStudent(studentModel);
     console.log("result ="+result);
     return result;
@@ -85,3 +90,12 @@ export const addStudent = async (studentModel: Student) => {
     console.log(error);
   }
 };
+
+export const studentDetails = async ()=>{
+  try {
+    const result: Student [] = await triggerStudentDetails();
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}

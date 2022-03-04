@@ -22,7 +22,7 @@ export class Student {
     gender:boolean;
     photo:string;
     email:string
-    phoneNo:string;
+    phoneNO:string;
     address:string;
     isActive:boolean;
     file?:any

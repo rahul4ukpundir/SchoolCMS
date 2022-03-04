@@ -54,7 +54,7 @@ const validationSchema = yup.object({
     .string()
     .max(32, 'mother name shoud not be more than 16 character.')
     .required('Mother name is required'),
-  phoneNo: yup
+    phoneNO: yup
     .string()
     .max(10, 'Phone should be of minimum 10 characters length.')
     .required('Phone is required'),
@@ -112,7 +112,7 @@ const AddStudent = () => {
       fatherName: '',
       motherName: '',
       dob: dayjs().utc().format(),
-      phoneNo: '',
+      phoneNO: '',
       gender: true,
       email: '',
       address: '',
@@ -252,14 +252,14 @@ const AddStudent = () => {
                   </LocalizationProvider>
                   <TextField
                     fullWidth
-                    id="phoneNo"
+                    id="phoneNO"
                     label="Phone No*"
-                    value={formik.values.phoneNo}
+                    value={formik.values.phoneNO}
                     onChange={formik.handleChange}
                     error={
-                      formik.touched.phoneNo && Boolean(formik.errors.phoneNo)
+                      formik.touched.phoneNO && Boolean(formik.errors.phoneNO)
                     }
-                    helperText={formik.touched.phoneNo && formik.errors.phoneNo}
+                    helperText={formik.touched.phoneNO && formik.errors.phoneNO}
                   />
                   <FormControl component="fieldset" style={{ marginLeft: 22 }}>
                     <FormLabel component="legend">Gender</FormLabel>
