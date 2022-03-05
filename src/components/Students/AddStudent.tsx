@@ -6,13 +6,10 @@ import PageTitleWrapper from 'src/components/PageTitleWrapper';
 import { addStudent } from '../../Services/studentService';
 import DateAdapter from '@mui/lab/AdapterDayjs';
 import DatePicker from '@mui/lab/DatePicker';
-import DateFnsUtils from '@date-io/date-fns';
+
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker
-} from '@material-ui/pickers';
+import ToggleBox from './ToggleBox';
 
 import {
   Container,
@@ -31,12 +28,15 @@ import {
   FormLabel,
   Box
 } from '@mui/material';
-
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { LocalizationProvider } from '@mui/lab';
 import { Student } from 'src/Model/StudentModel';
 import Label from '../Label';
 import Thumb from './Thumb';
+import { useLocation, matchPath } from 'react-router-dom';
+
+
 dayjs.extend(utc)
 const validationSchema = yup.object({
   classId: yup.number().integer().min(1, "Please select class").required('Please select class.'),
@@ -103,7 +103,8 @@ const classData = [
 ];
 
 const AddStudent = () => {
-  const [dobValue, setDobValue] = useState();
+  const [isStudentRegister, setStudentRegister] = useState(false);
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       classId: 0,
@@ -122,13 +123,16 @@ const AddStudent = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values: Student) => {
-      debugger;
-      addStudent(values).then((data) => {});
+      addStudent(values).then((data) => {
+        debugger;
+         setStudentRegister(true);
+      })
     }
   });
 
   return (
     <div>
+     {isStudentRegister && <ToggleBox navigateFn ={()=>navigate('/students/studentDetails')} alertType={"success"} alertText={"Student Registration successfully created."} alertVisible={true}/> }
       <form onSubmit={formik.handleSubmit}>
         <Helmet>
           <title>Add Student</title>
@@ -320,6 +324,7 @@ const AddStudent = () => {
                     variant="contained"
                     fullWidth
                     type="submit"
+                   
                   >
                     Submit
                   </Button>
