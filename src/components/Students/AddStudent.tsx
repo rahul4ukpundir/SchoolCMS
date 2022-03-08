@@ -3,13 +3,14 @@ import * as yup from 'yup';
 import { Helmet } from 'react-helmet-async';
 import PageTitle from 'src/components/PageTitle';
 import PageTitleWrapper from 'src/components/PageTitleWrapper';
-import { addStudent } from '../../Services/studentService';
+import { addStudent, getStudentByRollNo } from '../../Services/studentService';
 import DateAdapter from '@mui/lab/AdapterDayjs';
 import DatePicker from '@mui/lab/DatePicker';
 
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import ToggleBox from './ToggleBox';
+import "./Student.scss";
 
 import {
   Container,
@@ -29,12 +30,12 @@ import {
   Box
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { LocalizationProvider } from '@mui/lab';
 import { Student } from 'src/Model/StudentModel';
 import Label from '../Label';
 import Thumb from './Thumb';
-import { useLocation, matchPath } from 'react-router-dom';
+import {useParams } from 'react-router-dom';
 
 
 dayjs.extend(utc)
@@ -54,7 +55,11 @@ const validationSchema = yup.object({
     .string()
     .max(32, 'mother name shoud not be more than 16 character.')
     .required('Mother name is required'),
-    phoneNO: yup
+  dob:yup.date()
+  .nullable()
+  .transform((curr, orig) => orig === '' ? null : curr)
+  .required('DOB is Required'),
+  phoneNO: yup
     .string()
     .max(10, 'Phone should be of minimum 10 characters length.')
     .required('Phone is required'),
@@ -102,31 +107,55 @@ const classData = [
   }
 ];
 
-const AddStudent = () => {
+const AddStudent = (props:any) => {
   const [isStudentRegister, setStudentRegister] = useState(false);
+  const [fileData, setFileData] =useState(null);
   const navigate = useNavigate();
-  const formik = useFormik({
-    initialValues: {
-      classId: 0,
-      sectionId: 0,
-      studentName: '',
-      fatherName: '',
-      motherName: '',
-      dob: dayjs().utc().format(),
-      phoneNO: '',
-      gender: true,
-      email: '',
-      address: '',
-      photo: '',
+  let { id } = useParams();
+  let initialValue:Student;
+  if(Object.keys(props).length>0){
+    initialValue = {
+      classId: props.student.classId,
+      sectionId: props.student.sectionId,
+      studentName: props.student.studentName,
+      fatherName: props.student.fatherName,
+      motherName: props.student.motherName,
+      dob:  props.student.dob,
+      phoneNO:  props.student.phoneNO,
+      gender:  props.student.gender,
+      email: props.student.email,
+      address: props.student.address,
+      photo: props.student.photo,
       isActive: true,
       file:null
-    },
+    }
+  }
+  else{
+    initialValue = {
+      classId: 1,
+      sectionId: 1,
+      studentName: "",
+      fatherName: "",
+      motherName: "",
+      dob:  "",
+      phoneNO:  "",
+      gender: true,
+      email: "",
+      address: "",
+      photo: "",
+      isActive: true,
+      file:null
+    }
+  }
+
+
+  const formik = useFormik({
+    initialValues: initialValue,
     validationSchema: validationSchema,
-    onSubmit: (values: Student) => {
-      addStudent(values).then((data) => {
-        debugger;
-         setStudentRegister(true);
-      })
+    onSubmit: async(values: Student) => {
+       await addStudent(values).then((data) => {
+        setStudentRegister(true);
+      });
     }
   });
 
@@ -153,7 +182,7 @@ const AddStudent = () => {
           >
             <Grid item xs={12}>
               <Card>
-                <CardHeader title="New Student Registration" />
+                <CardHeader style={{color:"red"}} title="* fields are mandatory " />
                 <Divider />
                 <CardContent
                   sx={{ '& .MuiTextField-root': { m: 2, width: '25ch' } }}
@@ -164,6 +193,7 @@ const AddStudent = () => {
                     name="classId"
                     select
                     label="Select Class*"
+                    value ={props?.student?.classId}
                     onChange={formik.handleChange}
                     error={
                       formik.touched.classId && Boolean(formik.errors.classId)
@@ -182,6 +212,7 @@ const AddStudent = () => {
                     select
                     label="Select section*"
                     onChange={formik.handleChange}
+                    value ={props?.student?.sectionId}
                     error={
                       formik.touched.sectionId &&
                       Boolean(formik.errors.sectionId)
@@ -241,14 +272,19 @@ const AddStudent = () => {
                   <LocalizationProvider dateAdapter={DateAdapter}>
                     <DatePicker
                       value={formik.values.dob}
+                      label="Please select"
                       onChange={(newValue) => {
                         formik.setFieldValue('dob', newValue);
-                      }}
+                      }} 
+
                       renderInput={(params) => (
                         <TextField
-                          name="dob"
-                          value={formik.values.dob}
-                          onBlur={formik.handleBlur}
+                        id="dob"
+                        value={formik.values.dob}
+                          error={
+                            formik.touched.dob && Boolean(formik.errors.dob)
+                          }
+                          helperText={formik.touched.dob && formik.errors.dob}
                           {...params}
                         />
                       )}
@@ -312,12 +348,16 @@ const AddStudent = () => {
                   <div className="form-group">
                   <Label>Photo upload</Label>
                   <input id="file" name="file" type="file" onChange={(event) => {
-                    formik.setFieldValue("file", event.currentTarget.files[0]);
-                    console.log(event.currentTarget.files[0])
-                    
+                      let reader = new FileReader();
+                      reader.readAsDataURL(event.currentTarget.files[0]);
+                      setFileData(event.currentTarget.files[0]);
+                      reader.onloadend = () => {
+                         formik.setFieldValue("photo",reader.result);
+                      };
+                      console.log(fileData)
                   }} style ={{margin:20}} />
 
-                  {formik.values.file && <Thumb fileData={formik.values.file} />}
+                  {  <Thumb fileData={fileData} />}
                 </div>
                   <Button
                     color="primary"

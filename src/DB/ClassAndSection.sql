@@ -54,7 +54,7 @@ CREATE TABLE Student(
   MotherName VARCHAR(32),
   DOB DATE,
   Gender BIT,
-  Photo VARCHAR(16),
+  Photo VARCHAR(512),
   PhoneNO VARCHAR(10),
   Address VARCHAR(64),
   IsActive BIT,
@@ -99,3 +99,7 @@ DROP TABLE Section
 DROP TABLE StudentClass
 DROP TABLE CustomerQuery
 select * from CustomerQuery
+
+
+ALTER TABLE Student
+ALTER COLUMN Photo NVARCHAR(512);

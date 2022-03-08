@@ -23,6 +23,11 @@ const triggerAddStudent = async (studentModel: Student) => {
   return await apiService.POSTCALL(url, studentModel, 3000);
 };
 
+const triggerStudentDetailsByRollNo = async (rollNo:number) => {
+  const url = `${apiBaseUrl}GetStudentByRollNo?rollNo=${rollNo}`;
+  return await apiService.GETCALL(url, 3000, "");
+};
+
 const triggerStudentDetails = async () => {
   const url = `${apiBaseUrl}BindStudentDetails`;
   return await apiService.GETCALL(url, 3000, '');
@@ -90,7 +95,14 @@ export const addStudent = async (studentModel: Student) => {
     console.log(error);
   }
 };
-
+export const getStudentByRollNo = async (rollNo: number): Promise<Student> => {
+  try {
+    var result = await triggerStudentDetailsByRollNo(rollNo);
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};
 export const studentDetails = async ()=>{
   try {
     const result: Student [] = await triggerStudentDetails();

@@ -18,6 +18,7 @@ const ClassList =Loader(lazy(() => import('src/components/StudentClass/ClassList
 
 const StudentDetails =Loader(lazy(() => import('src/components/Students/StudentDetails')));
 const AddStudent =Loader(lazy(() => import('src/components/Students/AddStudent')));
+const EditStudent =Loader(lazy(() => import('src/components/Students/EditStudent')));
 
 
 const Transaction =Loader(lazy(() => import('src/components/Transactions/index')));
@@ -83,7 +84,7 @@ const routes: PartialRouteObject[] = [
         path: '/',
         element: (
           <Navigate
-            to="/students/addstudents"
+            to="/students/addstudents/"
             replace
           />
         )
@@ -95,6 +96,10 @@ const routes: PartialRouteObject[] = [
       {
         path: 'studentDetails',
         element: <StudentDetails />
+      },
+      {
+        path: 'editStudent/:id',
+        element: <EditStudent />
       }
     ]
   },
